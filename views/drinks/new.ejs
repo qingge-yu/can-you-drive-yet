@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+
+    <form action="/drinks" method="POST">
+        <label>What did you drink? </label>
+        <input type="text" , name="name">
+        <label>How much alcohol was in your drink?</label>
+        <select name="amount">
+            <option value="0.5">0.5 ounces</option>
+            <option value="1">1 ounces</option>
+            <option value="1.5">1.5 ounces</option>
+            <option value="2">2 ounces</option>
+            <option value="2.5">2.5 ounces</option>
+            <option value="3">3 ounce</option>
+            <option value="3.5">3.5 ounce</option>
+        </select>
+        <input type="submit" value="Add Drink">
+    </form>
+
+    <%- include('../partials/footer') %>

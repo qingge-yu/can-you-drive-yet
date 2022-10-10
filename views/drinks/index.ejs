@@ -1,1 +1,18 @@
 <%- include('../partials/header') %>
+
+    <% drinks.forEach(function(drink) { %>
+        <div>
+            <h3>Drink: </h3>
+            <p>
+                <%= drink.name %>
+            </p>
+            <h3>Amount: </h3>
+            <p>
+                <%= drink.amount %>
+            </p>
+        </div>
+        <% }) %>
+
+            <a href="drinks/new">I'm drinking another one</a>
+
+            <%- include('../partials/footer') %>

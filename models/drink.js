@@ -3,10 +3,10 @@ const Schema = mongoose.Schema
 
 const drinkSchema = new Schema({
     name: String,
-    amount: { type: String, min: 1, default: 1 },
-    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    userName: String,
-    userAvatar: String
+    amount: { type: Number, min: 1, default: 1 },
+    // user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    // userName: String,
+    // userAvatar: String
 }, {
     timestamps: true
 })
