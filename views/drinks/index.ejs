@@ -1,18 +1,39 @@
 <%- include('../partials/header') %>
 
     <% drinks.forEach(function(drink) { %>
-        <div>
-            <h3>Drink: </h3>
-            <p>
-                <%= drink.name %>
-            </p>
-            <h3>Amount: </h3>
-            <p>
-                <%= drink.amount %>
-            </p>
+        <div class="drinks">
+            <div>
+                <h3>Drink: </h3>
+                <p>
+                    <%= drink.name %>
+                </p>
+                <h3>Amount: </h3>
+                <p>
+                    <%= drink.amount %> ounces
+                </p>
+                <h3>Time:</h3>
+                <p>
+                    <%= drink.createdAt %>
+                </p>
+            </div>
+            <div>
+                <h3>How do you feel?</h3>
+                <form action="/drinks/<%= drink._id %>/reviews" method="POST">
+                    <label>Rate your drink:</label>
+                    <select name="rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <input type="submit" value="Add Review">
+                </form>
+                <h3>Review</h3>
+            </div>
         </div>
         <% }) %>
 
-            <a href="drinks/new">I'm drinking another one</a>
+            <a href="drinks/new" id="newDrink">I'm drinking another one</a>
 
             <%- include('../partials/footer') %>
