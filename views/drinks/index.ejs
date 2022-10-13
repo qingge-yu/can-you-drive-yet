@@ -7,33 +7,34 @@
                 <p>
                     <%= drink.name %>
                 </p>
-                <h3>Amount: </h3>
-                <p>
-                    <%= drink.amount %> ounces
-                </p>
-                <h3>Time:</h3>
-                <p>
-                    <%= drink.createdAt %>
-                </p>
+                <% if(user){ %>
+                    <a href="/drinks/<%=drink._id%>">Edit</a>
+                    <%}%>
             </div>
             <div>
-                <h3>How do you feel?</h3>
-                <form action="/drinks/<%= drink._id %>/reviews" method="POST">
-                    <label>Rate your drink:</label>
-                    <select name="rating">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    <input type="submit" value="Add Review">
-                </form>
-                <h3>Review</h3>
+                <% if(user) {%>
+                    <h3>How do you feel?</h3>
+                    <form action="/drinks/<%= drink._id %>/reviews" method="POST">
+                        <label>Rate your drink:</label>
+                        <input type="text" name="content">
+                        <input type="submit" value="Add Review">
+                    </form>
+                    <% } %>
+                        <% if(drink.reviews.length) { %>
+                            <h3>Review</h3>
+                            <% drink.reviews.forEach(function(review){ %>
+                                <ul>
+                                    <%= review.content %>
+
+                                </ul>
+                                <% })} else { %>
+                                    <h3>No Comments Yet</h3>
+                                    <% } %>
             </div>
         </div>
         <% }) %>
+            <% if(user) { %>
+                <a href="drinks/new" id="newDrink">I'm drinking another one</a>
+                <% } %>
 
-            <a href="drinks/new" id="newDrink">I'm drinking another one</a>
-
-            <%- include('../partials/footer') %>
+                    <%- include('../partials/footer') %>

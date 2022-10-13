@@ -1,7 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const reviewCtrl = require('../controllers/reviews')
+const reviewsCtrl = require('../controllers/reviews')
+const isLoggedIn = require('../config/auth')
 
-router.post('/drinks/:id/reviews', reviewsCtrl.create)
+router.get('/drinks/:id/reviews', isLoggedIn, reviewsCtrl.index)
+router.post('/drinks/:id/reviews', isLoggedIn, reviewsCtrl.create)
+router.put('/drinks/:id', isLoggedIn, reviewsCtrl.update)
+
 
 module.exports = router

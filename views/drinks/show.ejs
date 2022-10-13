@@ -1,0 +1,36 @@
+<%- include('../partials/header') %>
+
+    <div class="drinks">
+        <div>
+            <h3>Drink: </h3>
+            <p>
+                <%= drink.name %>
+            </p>
+            <h3>Amount: </h3>
+            <p>
+                <%= drink.amount %> ounces
+            </p>
+            <h3>Time:</h3>
+            <p>
+                <%= drink.createdAt %>
+            </p>
+        </div>
+        <div>
+
+
+
+            <h1>Reviews</h1>
+            <% drink.reviews.forEach(function(review){ %>
+                <ul>
+                    <%= review.content %>
+                </ul>
+                <form action="/drinks/<%= drink._id %>?_method=PUT" method="POST">
+                    <input name="text" value="<%= review.content %>">
+                    <button type="submit">UPDATE COMMENT</button>
+                </form>
+
+                <% })%>
+
+
+
+                    <%- include('../partials/footer') %>

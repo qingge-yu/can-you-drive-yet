@@ -20,8 +20,8 @@ router.get('/auth/google', passport.authenticate(
 router.get('/oauth2callback', passport.authenticate(
   'google',
   {
-    successRedirect: '/movies',
-    failureRedirect: '/movies'
+    successRedirect: '/drinks',
+    failureRedirect: '/drinks'
   }
 ));
 
@@ -29,7 +29,7 @@ router.get('/oauth2callback', passport.authenticate(
 router.get('/logout', function (req, res) {
   req.logout(function (err) {
     if (err) return next(err)
-    res.redirect('/movies');
+    res.redirect('/drinks');
   });
 
 });
