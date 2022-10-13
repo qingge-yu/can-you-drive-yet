@@ -22,19 +22,21 @@
                     <% } %>
                         <% if(drink.reviews.length) { %>
                             <h3>Review</h3>
-                            <% drink.reviews.forEach(function(review){ %>
-                                <ul>
-                                    <%= review.content %>
-
-                                </ul>
-                                <% })} else { %>
-                                    <h3>No Comments Yet</h3>
-                                    <% } %>
+                            <ul>
+                                <% drink.reviews.forEach(function(review){ %>
+                                    <li>
+                                        <%= review.content %>
+                                    </li>
+                                    <%}) %>
+                            </ul>
+                            <% } else { %>
+                                <h3>No Comments Yet</h3>
+                                <% } %>
             </div>
         </div>
         <% }) %>
             <% if(user) { %>
-                <a href="drinks/new" id="newDrink">I'm drinking another one</a>
+                <a href="/drinks/new" id="newDrink">I'm drinking another one</a>
                 <% } %>
 
                     <%- include('../partials/footer') %>

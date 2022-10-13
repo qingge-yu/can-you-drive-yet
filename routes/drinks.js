@@ -8,5 +8,4 @@ router.get('/new', drinksCtrl.new)
 router.post('/', drinksCtrl.create)
 router.get('/:id', isLoggedIn, drinksCtrl.show)
 
-
 module.exports = router;

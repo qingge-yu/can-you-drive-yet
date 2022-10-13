@@ -1,5 +1,4 @@
 <%- include('../partials/header') %>
-
     <div class="drinks">
         <div>
             <h3>Drink: </h3>
@@ -19,18 +18,24 @@
 
 
 
+
+
             <h1>Reviews</h1>
             <% drink.reviews.forEach(function(review){ %>
                 <ul>
                     <%= review.content %>
                 </ul>
-                <form action="/drinks/<%= drink._id %>?_method=PUT" method="POST">
-                    <input name="text" value="<%= review.content %>">
-                    <button type="submit">UPDATE COMMENT</button>
-                </form>
+                <% if(user && user._id.equals(drink.user)) { %>
+                    <form action="/drinks/<%= drink._id %>/reviews/<%=review._id%>?_method=PUT" method="POST">
+                        <input name="content" value="<%= review.content %>">
+                        <button type="submit">UPDATE COMMENT</button>
+                    </form>
+                    <form action="/drinks/<%= drink._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+                        <button type="submit">DELETE COMMENT</button>
+                    </form>
+                    <% } %>
 
-                <% })%>
+                        <% })%>
 
 
-
-                    <%- include('../partials/footer') %>
+                            <%- include('../partials/footer') %>

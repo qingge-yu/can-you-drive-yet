@@ -3,7 +3,8 @@ const Drink = require('../models/drink')
 module.exports = {
     create,
     index,
-    update
+    update,
+    delete: deleteReview
 }
 
 
@@ -14,7 +15,8 @@ function create(req, res) {
         req.body.userAvatar = req.user.avatar;
         drink.reviews.push(req.body)
         drink.save(function (err) {
-            res.redirect(`/drinks/${drink._id}/reviews`)
+            console.log(drink)
+            res.redirect(`/drinks`)
         })
     })
 }
@@ -31,19 +33,34 @@ function index(req, res) {
 }
 
 function update(req, res) {
-    console.log('I AM HERE')
-    Drink.findOne({ 'review._id': req.params.id }, function (err, drink) {
-        console.log(drink)
-        const reviewSubdoc = drink.reviews.id(req.params.id)
-        console.log(drink.reviews)
-        if (!reviewSubdoc.id.equals(req.user._id)) return res.redirect(`/drinks/${drink._id}`)
+    console.log('I AM HERE', req.body)
+    Drink.findById(req.params.drinksid, function (err, drink) {
+        console.log("DRINK: " + drink)
+        const reviewSubdoc = drink.reviews.id(req.params.reviewid)
+
+        console.log("DRINK REVIEW: " + reviewSubdoc)
+        if (!reviewSubdoc.user.equals(req.user._id)) return res.redirect(`/drinks/${drink._id}`)
         reviewSubdoc.content = req.body.content
         drink.save(function (err) {
-            console.log('UPDATE ERROR: ' + err)
+            console.log(err)
             res.redirect(`/drinks/${drink._id}`)
         })
     })
 }
+
+function deleteReview(req, res) {
+    Drink.findById(req.params.drinkid,
+        function (err, drink) {
+            console.log("-----" + drink)
+            if (err) return res.redirect(`/drinks/${drink._id}`);
+            drink.reviews.remove(req.params.reviewid);
+            drink.save(function (err) {
+                console.log("------" + err)
+                return res.redirect(`/drinks/${drink._id}`);
+            })
+        });
+}
+
 
 
 // function update(req, res) {
