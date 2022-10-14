@@ -13,8 +13,8 @@
   <br>
   <h3>-- Technologies Used --</h3>
   <ul>
-    <li>Node.JS</li>
-    <li>Express</li>
+    <li>Node.js</li>
+    <li>Express.js</li>
     <li>Mongoose</li>
     <li>MongoDB</li>
     <li>Google OAuth</li>
