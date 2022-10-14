@@ -39,4 +39,24 @@
                 <a href="/drinks/new" id="newDrink">I'm drinking another one</a>
                 <% } %>
 
+                    <div>
+                        <h3>Your total alcohol intake:</h3>
+                        <% let total=0 %>
+                            <% drinks.forEach(function(drink){ %>
+                                <% total +=drink.amount %>
+                                    <% }) %>
+                                        <h3>
+                                            <%= total %> ounces
+                                        </h3>
+                    </div>
+
+                    <div>
+                        <h3>You can safely drive at:</h3>
+                        <% let drivingTime=new Date() %>
+                            <% console.log(drinks[0]) %>
+                                <% drivingTime.setTime(drinks[0].createdAt.getTime()+(3600000*total)) %>
+                                    <h3>
+                                        <%=drivingTime%>
+                                    </h3>
+                    </div>
                     <%- include('../partials/footer') %>
