@@ -1,5 +1,5 @@
 <%- include('../partials/header') %>
-    <div class="drinks">
+    <div class="show-page">
         <div>
             <h3>Drink: </h3>
             <p>
@@ -14,28 +14,32 @@
                 <%= drink.createdAt %>
             </p>
         </div>
-        <div>
 
 
 
 
 
-            <h1>Reviews</h1>
-            <% drink.reviews.forEach(function(review){ %>
-                <ul>
-                    <%= review.content %>
-                </ul>
-                <% if(user && user._id.equals(drink.user)) { %>
-                    <form action="/drinks/<%= drink._id %>/reviews/<%=review._id%>?_method=PUT" method="POST">
-                        <input name="content" value="<%= review.content %>">
-                        <button type="submit">UPDATE COMMENT</button>
-                    </form>
-                    <form action="/drinks/<%= drink._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
-                        <button type="submit">DELETE COMMENT</button>
-                    </form>
-                    <% } %>
 
-                        <% })%>
+        <h3>Reviews</h3>
+        <% drink.reviews.forEach(function(review){ %>
+            <ul>
+                <%= review.content %>
+            </ul>
+            <% if(user && user._id.equals(drink.user)) { %>
+                <form action="/drinks/<%= drink._id %>/reviews/<%=review._id%>?_method=PUT" method="POST">
+                    <input name="content" value="<%= review.content %>">
+                    <button type="submit" class="btn btn-secondary btn-sm">UPDATE COMMENT</button>
+                </form>
+                <form action="/drinks/<%= drink._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+                    <button type="submit" class="btn btn-secondary btn-sm">DELETE COMMENT</button>
+                </form>
+
+                <% } %>
+
+                    <% })%>
+                        <a href="/drinks"><i class="bi bi-box-arrow-left"></i></a>
+
+    </div>
 
 
-                            <%- include('../partials/footer') %>
+    <%- include('../partials/footer') %>

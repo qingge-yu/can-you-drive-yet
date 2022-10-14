@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 
-    <form action="/drinks" method="POST">
+    <form action="/drinks" method="POST" class="new">
         <label>What did you drink? </label>
         <input type="text" , name="name">
         <label>How much alcohol was in your drink?</label>
@@ -13,7 +13,7 @@
             <option value="3">3 ounce</option>
             <option value="3.5">3.5 ounce</option>
         </select>
-        <input type="submit" value="Add Drink">
+        <input type="submit" value="Add Drink" class="btn btn-secondary btn-sm">
     </form>
 
     <%- include('../partials/footer') %>

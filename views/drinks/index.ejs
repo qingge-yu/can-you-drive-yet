@@ -1,62 +1,72 @@
 <%- include('../partials/header') %>
 
-    <% drinks.forEach(function(drink) { %>
-        <div class="drinks">
-            <div>
-                <h3>Drink: </h3>
-                <p>
-                    <%= drink.name %>
-                </p>
-                <% if(user){ %>
-                    <a href="/drinks/<%=drink._id%>">Edit</a>
-                    <%}%>
-            </div>
-            <div>
-                <% if(user) {%>
-                    <h3>How do you feel?</h3>
-                    <form action="/drinks/<%= drink._id %>/reviews" method="POST">
-                        <label>Rate your drink:</label>
-                        <input type="text" name="content">
-                        <input type="submit" value="Add Review">
-                    </form>
-                    <% } %>
-                        <% if(drink.reviews.length) { %>
-                            <h3>Review</h3>
-                            <ul>
-                                <% drink.reviews.forEach(function(review){ %>
-                                    <li>
-                                        <%= review.content %>
-                                    </li>
-                                    <%}) %>
-                            </ul>
-                            <% } else { %>
-                                <h3>No Comments Yet</h3>
-                                <% } %>
-            </div>
+    <nav>
+        <% if(user) { %>
+            <a href=""></a>
+            <a href="/drinks/new"><i class="bi bi-cup-straw"></i>Take A Drink<i class="bi bi-cup-straw"></i></a>
+            <a href="/logout"><i class="bi bi-box-arrow-right text-secondary"></i></a>
+            <% } %>
+    </nav>
+    <main>
+        <div class="left">
+            <% drinks.forEach(function(drink) { %>
+                <div class="new-drink">
+                    <div class="drinks">
+                        <h6>Drink: </h6>
+                        <p>
+                            <%= drink.name %>
+                        </p>
+                        <% if(user){ %>
+                            <a href="/drinks/<%=drink._id%>"><i class="bi bi-pencil-square"></i></a>
+                            <%}%>
+                    </div>
+                    <div class="reviews">
+                        <% if(user) {%>
+                            <form action="/drinks/<%= drink._id %>/reviews" method="POST">
+                                <label>Rate your drink:</label>
+                                <input type="text" name="content">
+                                <input type="submit" value="Add Review" class="btn-secondary btn-sm">
+                            </form>
+                            <% } %>
+                                <% if(drink.reviews.length) { %>
+                                    <ul>
+                                        <% drink.reviews.forEach(function(review){ %>
+                                            <li>
+                                                <i class="bi bi-chat-heart"></i>
+                                                <%= review.content %>
+                                            </li>
+                                            <%}) %>
+                                    </ul>
+                                    <% } else { %>
+                                        <h7>No Comments Yet</h7>
+                                        <% } %>
+                    </div>
+                </div>
+                <% }) %>
         </div>
-        <% }) %>
-            <% if(user) { %>
-                <a href="/drinks/new" id="newDrink">I'm drinking another one</a>
+        <div class="right">
+            <% if(drinks.length) { %>
+                <div class="intake">
+                    <h6>Your total alcohol intake:</h6>
+                    <% let total=0 %>
+                        <% drinks.forEach(function(drink){ %>
+                            <% total +=drink.amount %>
+                                <% }) %>
+                                    <h5>
+                                        <%= total %> ounces
+                                    </h5>
+                </div>
+
+                <div class="drive-time">
+                    <h6>You can safely drive at:</h6>
+                    <% let drivingTime=new Date() %>
+                        <% console.log(drinks[0]) %>
+                            <% drivingTime.setTime(drinks[0].createdAt.getTime()+(3600000*total)) %>
+                                <h5>
+                                    <%=drivingTime%>
+                                </h5>
+                </div>
                 <% } %>
-
-                    <div>
-                        <h3>Your total alcohol intake:</h3>
-                        <% let total=0 %>
-                            <% drinks.forEach(function(drink){ %>
-                                <% total +=drink.amount %>
-                                    <% }) %>
-                                        <h3>
-                                            <%= total %> ounces
-                                        </h3>
-                    </div>
-
-                    <div>
-                        <h3>You can safely drive at:</h3>
-                        <% let drivingTime=new Date() %>
-                            <% console.log(drinks[0]) %>
-                                <% drivingTime.setTime(drinks[0].createdAt.getTime()+(3600000*total)) %>
-                                    <h3>
-                                        <%=drivingTime%>
-                                    </h3>
-                    </div>
-                    <%- include('../partials/footer') %>
+        </div>
+    </main>
+    <%- include('../partials/footer') %>
